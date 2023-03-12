@@ -74,15 +74,13 @@ const menu = [
 ];
 
 let sectionCenter = document.querySelector(".section-center");
-let container = document.querySelector("#filterButtons")
-
+let container = document.querySelector("#filterButtons");
 
 //load İtems
 window.addEventListener("DOMContentLoaded", function () {
   displayMenuItem(menu);
-  displayMenuButtons()
+  displayMenuButtons();
 });
-
 
 function displayMenuItem(menuItem) {
   let displayMenu = menuItem.map(function (item) {
@@ -105,18 +103,23 @@ function displayMenuItem(menuItem) {
   sectionCenter.innerHTML = displayMenu;
 }
 
-function displayMenuButtons(){
-  const categories=menu.reduce(function(values,item){
-    if(!values.includes(item.category)){
-      values.push(item.category)
-    }
-  return values 
-  },["All"])
-  const categoryBtns=categories.map(function(category){
-   return `<button class="btn-item" type="button" data-id=
-   ${category}> ${category} </button> ` 
-  }).join("");
-  container.innerHTML=categoryBtns;
+function displayMenuButtons() {
+  const categories = menu.reduce(
+    function (values, item) {
+      if (!values.includes(item.category)) {
+        values.push(item.category);
+      }
+      return values;
+    },
+    ["All"]
+  );
+  const categoryBtns = categories
+    .map(function (category) {
+      return `<button class="btn-item" type="button" data-id=
+   ${category}> ${category} </button> `;
+    })
+    .join("");
+  container.innerHTML = categoryBtns;
   let filterBtns = container.querySelectorAll(".btn-item");
   //Filter İtems
   filterBtns.forEach(function (btn) {
@@ -125,17 +128,15 @@ function displayMenuButtons(){
       const menuCategory = menu.filter(function (menuItem1) {
         // console.log(menuItem.category)
         if (menuItem1.category === category) {
-        return menuItem1;
+          return menuItem1;
         }
       });
       // console.log(menuCategory)
       if (category === "All") {
-        displayMenuItem(menu);  
+        displayMenuItem(menu);
       } else {
         displayMenuItem(menuCategory);
       }
     });
   });
-
-  
 }
